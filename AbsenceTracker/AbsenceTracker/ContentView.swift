@@ -9,53 +9,41 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    @State private var isModalPresented = false
+    @State private var username = ""
+    @State private var password = ""
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+        NavigationView {
+            MainView()
+                .toolbar {
+                    ToolbarItem(placement: .bottomBar) {
+                        
+                        HStack{
+                            
+                            Spacer()
+                            Text("New Subject")
+                                .font(.title2)
+                                .foregroundColor(Color("DarkBlue"))
+                            
+                            Button(action: {
+                                isModalPresented = true
+                            }) {
+                                Image(systemName: "plus.circle.fill")
+                                    .foregroundColor(Color("DarkBlue"))
+
+                            }
+                        }
+                        
                     }
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
         }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
+        .sheet(isPresented: $isModalPresented) {
+            SubjectFormView( isPresented: $isModalPresented)
         }
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }

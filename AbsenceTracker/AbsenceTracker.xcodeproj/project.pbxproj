@@ -18,6 +18,9 @@
 		D4B437782BB3104B00FE11D6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B437772BB3104B00FE11D6 /* MainView.swift */; };
 		D4B4377A2BB3139300FE11D6 /* SubjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B437792BB3139300FE11D6 /* SubjectCardView.swift */; };
 		D4B4377C2BB314B600FE11D6 /* SubjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B4377B2BB314B600FE11D6 /* SubjectModel.swift */; };
+		D4B4377E2BB998AF00FE11D6 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B4377D2BB998AF00FE11D6 /* DetailView.swift */; };
+		D4B437802BB99CFC00FE11D6 /* SubjectFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B4377F2BB99CFC00FE11D6 /* SubjectFormView.swift */; };
+		D4B437822BB99E0800FE11D6 /* ExampleSwiftdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B437812BB99E0800FE11D6 /* ExampleSwiftdata.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,9 @@
 		D4B437772BB3104B00FE11D6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D4B437792BB3139300FE11D6 /* SubjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCardView.swift; sourceTree = "<group>"; };
 		D4B4377B2BB314B600FE11D6 /* SubjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectModel.swift; sourceTree = "<group>"; };
+		D4B4377D2BB998AF00FE11D6 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		D4B4377F2BB99CFC00FE11D6 /* SubjectFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectFormView.swift; sourceTree = "<group>"; };
+		D4B437812BB99E0800FE11D6 /* ExampleSwiftdata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSwiftdata.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,12 +110,15 @@
 			children = (
 				D4B4374B2BB30FCD00FE11D6 /* AbsenceTrackerApp.swift */,
 				D4B4374D2BB30FCD00FE11D6 /* ContentView.swift */,
+				D4B437812BB99E0800FE11D6 /* ExampleSwiftdata.swift */,
 				D4B4374F2BB30FCD00FE11D6 /* Item.swift */,
 				D4B437512BB30FCE00FE11D6 /* Assets.xcassets */,
 				D4B437532BB30FCE00FE11D6 /* Preview Content */,
 				D4B437772BB3104B00FE11D6 /* MainView.swift */,
 				D4B437792BB3139300FE11D6 /* SubjectCardView.swift */,
 				D4B4377B2BB314B600FE11D6 /* SubjectModel.swift */,
+				D4B4377D2BB998AF00FE11D6 /* DetailView.swift */,
+				D4B4377F2BB99CFC00FE11D6 /* SubjectFormView.swift */,
 			);
 			path = AbsenceTracker;
 			sourceTree = "<group>";
@@ -272,6 +281,9 @@
 				D4B4374E2BB30FCD00FE11D6 /* ContentView.swift in Sources */,
 				D4B437782BB3104B00FE11D6 /* MainView.swift in Sources */,
 				D4B4377C2BB314B600FE11D6 /* SubjectModel.swift in Sources */,
+				D4B4377E2BB998AF00FE11D6 /* DetailView.swift in Sources */,
+				D4B437822BB99E0800FE11D6 /* ExampleSwiftdata.swift in Sources */,
+				D4B437802BB99CFC00FE11D6 /* SubjectFormView.swift in Sources */,
 				D4B437502BB30FCD00FE11D6 /* Item.swift in Sources */,
 				D4B4374C2BB30FCD00FE11D6 /* AbsenceTrackerApp.swift in Sources */,
 				D4B4377A2BB3139300FE11D6 /* SubjectCardView.swift in Sources */,

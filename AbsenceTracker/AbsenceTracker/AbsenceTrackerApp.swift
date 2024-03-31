@@ -25,7 +25,7 @@ struct AbsenceTrackerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainView()
+            ContentView()
         }
         .modelContainer(sharedModelContainer)
     }
