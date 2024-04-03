@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct Subject: Identifiable {
+    
+   
+    
     var id = UUID()
     var name: String
     var startDate: Date
@@ -24,6 +28,9 @@ struct Subject: Identifiable {
 }
 
 struct SubjectFormView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Query private var subject_arr: [SubjectModel]
+    
     @State private var name = ""
     @State private var startDate = Date()
     @State private var endDate = Date()
@@ -33,8 +40,8 @@ struct SubjectFormView: View {
     @State private var attendanceMethod = 0
     
     @State private var image = "pencil"
-    @State private var offset = 0.0
-    @State private var place = 1
+    @State private var offset = 0
+    @State private var place = 0
     @Binding var isPresented: Bool
     
     @State private var subjects: [Subject] = []
@@ -76,20 +83,28 @@ struct SubjectFormView: View {
         let attendanceMethod: Subject.AttendanceMethod = attendanceMethod == 0 ? .percentage(0.8) : .maxAbsences(5)
         let newSubject = Subject(name: name, startDate: startDate, endDate: endDate, frequency: frequency, initialHour: initialHour, finalHour: finalHour, attendanceMethod: attendanceMethod)
         
+        let newModel = SubjectModel(name: name, image: "pencil",scale: 1.0,  offset: 0, place: subject_arr.count , startDate: startDate, endDate: endDate, frequency: 1, initialHour: initialHour, finalHour: finalHour)
+        
         subjects.append(newSubject)
         
+        modelContext.insert(newModel)
+        
         // Optionally, you can reset the form fields here
-        // name = ""
-        // startDate = Date()
-        // endDate = Date()
-        // frequency = 1
-        // initialHour = Date()
-        // finalHour = Date()
-        // attendanceMethod = 0
+        name = ""
+        startDate = Date()
+        endDate = Date()
+        frequency = 1
+        initialHour = Date()
+        finalHour = Date()
+        //attendanceMethod = 0
+        
+        isPresented = false
     }
 }
 
 #Preview {
     SubjectFormView( isPresented: .constant(true))
+        .modelContainer(for: SubjectModel.self, inMemory: true)
+
 
 }

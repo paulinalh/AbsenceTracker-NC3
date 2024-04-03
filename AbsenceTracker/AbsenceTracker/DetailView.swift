@@ -64,6 +64,6 @@ struct DetailView: View{
 
 #Preview {
 
-    DetailView(subject: SubjectModel(id: 0, image: "pencil", name: "Math", offset: 0, place: 1), show: .constant(true), name: Namespace().wrappedValue)
+    DetailView(subject:  SubjectModel(name: "Math", image: "pencil", scale: 1.0, offset: 0, place: 1, startDate: Date(), endDate: Date(), frequency: 1, initialHour: Date(), finalHour: Date()), show: .constant(true), name: Namespace().wrappedValue)
 
 }

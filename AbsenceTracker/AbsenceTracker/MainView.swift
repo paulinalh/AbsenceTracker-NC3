@@ -6,23 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MainView: View {
     
-    @State var subject_arr = [
-        SubjectModel(id: 0, image: "pencil", name: "Math", offset: 0, place: 1),
-        SubjectModel(id: 1, image: "pencil", name: "Math", offset: 0, place: 2),
-        SubjectModel(id: 2, image: "pencil", name: "Math", offset: 0, place: 3),
-        SubjectModel(id: 3, image: "pencil", name: "Math", offset: 0, place: 4),
-        SubjectModel(id: 4, image: "pencil", name: "Math", offset: 0, place: 5),
-    ]
+    @State private var isDeleting = false
+    @State private var deletionIndex: Int?
     
-    /*@State var subject_arr = [
-        SubjectModel(id: 1, name: "Math", image: "math_image", offset: 0.0, place: 1, startDate: Date(), endDate: Date(), frequency: 1, initialHour: Date(), finalHour: Date(), attendanceMethod: .percentage(0.8)),
-        SubjectModel(id: 1, name: "Math", image: "math_image", offset: 0.0, place: 1, startDate: Date(), endDate: Date(), frequency: 1, initialHour: Date(), finalHour: Date(), attendanceMethod: .percentage(0.8))
+    @Environment(\.modelContext) private var modelContext
+    @Query private var subject_arr: [SubjectModel]
+    @State private var cards: [SubjectModel] = []
 
-    ]*/
-    
+
     @State var swiped = 0
     @Namespace var name
     @State var selected : SubjectModel!
@@ -47,32 +42,36 @@ struct MainView: View {
                 
                 GeometryReader{reader in
                     ZStack{
-                        ForEach(subject_arr.reversed()){subject in
-                            
-                
-                            SubjectCardView(subject: subject , reader: reader, swiped: $swiped, show: $show, selected: $selected )
+                        ForEach(cards.reversed(), id:\.id){subject in
+                            SubjectCardView(subject: subject , reader: reader, swiped: $swiped, show: $show, selected: $selected, isDeleting: $isDeleting )
                                 .offset(x: subject.offset)
                                 .rotationEffect(.init(degrees: getRotation(offset: subject.offset)))
                                 .gesture(DragGesture().onChanged({(value) in
                                     
-                                    
-                                        withAnimation{
+                                    let index = cards.firstIndex(where: {$0.id == subject.id})
+                                    withAnimation{
                                             if value.translation.width > 0 {
-                                                subject_arr[subject.id].offset = value.translation.width
+                                                cards[index!].offset = value.translation.width
                                             }
                                             
                                         }
                                     
                                 }).onEnded({ (value) in
-                                    
+                                    let index = cards.firstIndex(where: {$0.id == subject.id})
+
                                     withAnimation{
                                         if value.translation.width > 150 {
-                                            subject_arr[subject.id].offset = 1000
-                                            swiped = subject.id + 1
+                                            cards[index!].offset = 1000
+                                            if swiped == cards.count - 1 {
+                                                swiped = 0
+                                            }else{
+                                                swiped = subject.place + 1
+                                            }
                                             
-                                            restoreCard(id: subject.id)
+                                            
+                                            restoreCard(id: index!)
                                         }else{
-                                            subject_arr[subject.id].offset = 0
+                                            cards[index!].offset = 0
                                         }
                                     }
                                 }))
@@ -99,23 +98,52 @@ struct MainView: View {
         
             Color.white.opacity(show ? 0 : 1)
         )
+        .onAppear{
+            self.cards = subject_arr
+        }
+        .onChange(of: subject_arr) { newValue in
+            self.cards = newValue
+        }
     }
     
     func restoreCard(id: Int){
         
-        var currentCard = subject_arr[id]
+
+        //var currentCard = cards[id]
         
-        currentCard.id = subject_arr.count
-        subject_arr.append(currentCard)
+        //currentCard.place = cards.count
+        //cards.append(currentCard)
+        
+        let subject = cards.remove(at: id)
+        //subject.place = cards.count + 1
+        cards.append(subject)
+        
+        //modelContext.insert(currentCard)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3){
             
             withAnimation{
-                subject_arr[subject_arr.count - 1].offset = 0
+                cards[cards.count - 1].offset = 0
             }
         }
         
+        
+        
     }
+    
+    /*func restoreCard(id: Int){
+        guard id >= 0 && id < cards.count else { return }
+        
+        let currentCard = cards.remove(at: id)
+        cards.append(currentCard)
+        
+        // This assumes you've fixed the ID uniqueness issue elsewhere or using stable IDs
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            withAnimation {
+                cards[cards.count - 1].offset = 0
+            }
+        }
+    }*/
     
     func getRotation(offset: CGFloat)-> Double{
         let value = offset / 150
@@ -133,4 +161,5 @@ struct MainView: View {
 
 #Preview {
     MainView()
+        .modelContainer(for: SubjectModel.self, inMemory: true)
 }

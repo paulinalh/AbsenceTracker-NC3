@@ -8,22 +8,24 @@
 import Foundation
 import SwiftData
 
-struct SubjectModel: Identifiable {
+/*struct SubjectModel: Identifiable {
     var id: Int
     var image: String
     var name : String
     var offset: CGFloat
     var place : Int
     
-}
+}*/
 
-/*@Model
+
+@Model
 final class SubjectModel {
-    var id : Int
+    let id = UUID()
     var name: String
     //For card animation
     var image: String
     var offset: CGFloat
+    var scale: CGFloat
     var place : Int
     //Subject details
     var startDate: Date
@@ -31,17 +33,18 @@ final class SubjectModel {
     var frequency: Int // Frequency in days of the week
     var initialHour: Date
     var finalHour: Date
-    var attendanceMethod: AttendanceMethod
+    /*var attendanceMethod: AttendanceMethod
     
     enum AttendanceMethod {
         case percentage(Double) // Percentage of attendance required
         case maxAbsences(Int) // Maximum number of allowed absences
-    }
+    }*/
     
-    init(id: Int, name: String, image: String, offset: CGFloat, place: Int, startDate: Date, endDate: Date, frequency: Int, initialHour: Date, finalHour: Date, attendanceMethod: AttendanceMethod) {
-        self.id = id
+    init( name: String, image: String, scale:CGFloat, offset: CGFloat, place: Int, startDate: Date, endDate: Date, frequency: Int, initialHour: Date, finalHour: Date ) {
+        //self.id = id
         self.name = name
         self.image = image
+        self.scale = scale
         self.offset = offset
         self.place = place
         self.startDate = startDate
@@ -49,9 +52,9 @@ final class SubjectModel {
         self.frequency = frequency
         self.initialHour = initialHour
         self.finalHour = finalHour
-        self.attendanceMethod = attendanceMethod
+        //self.attendanceMethod = attendanceMethod
     }
-}*/
+}
 
 
 
