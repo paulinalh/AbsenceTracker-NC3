@@ -118,18 +118,12 @@
 		D4B4374A2BB30FCD00FE11D6 /* AbsenceTracker */ = {
 			isa = PBXGroup;
 			children = (
+				D4B4378F2BBE06E200FE11D6 /* Views */,
+				D4B4378E2BBE06D900FE11D6 /* Models */,
 				D4B4378D2BBE05F800FE11D6 /* Utils */,
 				D4B4374B2BB30FCD00FE11D6 /* AbsenceTrackerApp.swift */,
-				D4B4374D2BB30FCD00FE11D6 /* ContentView.swift */,
-				D4B437812BB99E0800FE11D6 /* ExampleSwiftdata.swift */,
-				D4B4374F2BB30FCD00FE11D6 /* Item.swift */,
 				D4B437512BB30FCE00FE11D6 /* Assets.xcassets */,
 				D4B437532BB30FCE00FE11D6 /* Preview Content */,
-				D4B437772BB3104B00FE11D6 /* MainView.swift */,
-				D4B437792BB3139300FE11D6 /* SubjectCardView.swift */,
-				D4B4377B2BB314B600FE11D6 /* SubjectModel.swift */,
-				D4B4377D2BB998AF00FE11D6 /* DetailView.swift */,
-				D4B4377F2BB99CFC00FE11D6 /* SubjectFormView.swift */,
 			);
 			path = AbsenceTracker;
 			sourceTree = "<group>";
@@ -169,6 +163,28 @@
 				D4B437872BBDA32700FE11D6 /* FormatDates.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		D4B4378E2BBE06D900FE11D6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D4B4374F2BB30FCD00FE11D6 /* Item.swift */,
+				D4B4377B2BB314B600FE11D6 /* SubjectModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D4B4378F2BBE06E200FE11D6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D4B4377D2BB998AF00FE11D6 /* DetailView.swift */,
+				D4B4374D2BB30FCD00FE11D6 /* ContentView.swift */,
+				D4B437772BB3104B00FE11D6 /* MainView.swift */,
+				D4B437792BB3139300FE11D6 /* SubjectCardView.swift */,
+				D4B4377F2BB99CFC00FE11D6 /* SubjectFormView.swift */,
+				D4B437812BB99E0800FE11D6 /* ExampleSwiftdata.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
