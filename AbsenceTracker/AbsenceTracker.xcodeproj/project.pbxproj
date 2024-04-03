@@ -21,6 +21,11 @@
 		D4B4377E2BB998AF00FE11D6 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B4377D2BB998AF00FE11D6 /* DetailView.swift */; };
 		D4B437802BB99CFC00FE11D6 /* SubjectFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B4377F2BB99CFC00FE11D6 /* SubjectFormView.swift */; };
 		D4B437822BB99E0800FE11D6 /* ExampleSwiftdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B437812BB99E0800FE11D6 /* ExampleSwiftdata.swift */; };
+		D4B437842BBD0E0D00FE11D6 /* SchoolSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B437832BBD0E0D00FE11D6 /* SchoolSymbols.swift */; };
+		D4B437862BBD13DF00FE11D6 /* CalculateClassDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B437852BBD13DF00FE11D6 /* CalculateClassDuration.swift */; };
+		D4B437882BBDA32700FE11D6 /* FormatDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B437872BBDA32700FE11D6 /* FormatDates.swift */; };
+		D4B4378A2BBDA66A00FE11D6 /* FormatHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B437892BBDA66A00FE11D6 /* FormatHours.swift */; };
+		D4B4378C2BBE05EE00FE11D6 /* getWeekdays.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B4378B2BBE05EE00FE11D6 /* getWeekdays.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +63,11 @@
 		D4B4377D2BB998AF00FE11D6 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		D4B4377F2BB99CFC00FE11D6 /* SubjectFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectFormView.swift; sourceTree = "<group>"; };
 		D4B437812BB99E0800FE11D6 /* ExampleSwiftdata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSwiftdata.swift; sourceTree = "<group>"; };
+		D4B437832BBD0E0D00FE11D6 /* SchoolSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolSymbols.swift; sourceTree = "<group>"; };
+		D4B437852BBD13DF00FE11D6 /* CalculateClassDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateClassDuration.swift; sourceTree = "<group>"; };
+		D4B437872BBDA32700FE11D6 /* FormatDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatDates.swift; sourceTree = "<group>"; };
+		D4B437892BBDA66A00FE11D6 /* FormatHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatHours.swift; sourceTree = "<group>"; };
+		D4B4378B2BBE05EE00FE11D6 /* getWeekdays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getWeekdays.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +118,7 @@
 		D4B4374A2BB30FCD00FE11D6 /* AbsenceTracker */ = {
 			isa = PBXGroup;
 			children = (
+				D4B4378D2BBE05F800FE11D6 /* Utils */,
 				D4B4374B2BB30FCD00FE11D6 /* AbsenceTrackerApp.swift */,
 				D4B4374D2BB30FCD00FE11D6 /* ContentView.swift */,
 				D4B437812BB99E0800FE11D6 /* ExampleSwiftdata.swift */,
@@ -146,6 +157,18 @@
 				D4B4376A2BB30FCE00FE11D6 /* AbsenceTrackerUITestsLaunchTests.swift */,
 			);
 			path = AbsenceTrackerUITests;
+			sourceTree = "<group>";
+		};
+		D4B4378D2BBE05F800FE11D6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D4B4378B2BBE05EE00FE11D6 /* getWeekdays.swift */,
+				D4B437852BBD13DF00FE11D6 /* CalculateClassDuration.swift */,
+				D4B437892BBDA66A00FE11D6 /* FormatHours.swift */,
+				D4B437832BBD0E0D00FE11D6 /* SchoolSymbols.swift */,
+				D4B437872BBDA32700FE11D6 /* FormatDates.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,11 +304,16 @@
 				D4B4374E2BB30FCD00FE11D6 /* ContentView.swift in Sources */,
 				D4B437782BB3104B00FE11D6 /* MainView.swift in Sources */,
 				D4B4377C2BB314B600FE11D6 /* SubjectModel.swift in Sources */,
+				D4B437842BBD0E0D00FE11D6 /* SchoolSymbols.swift in Sources */,
 				D4B4377E2BB998AF00FE11D6 /* DetailView.swift in Sources */,
 				D4B437822BB99E0800FE11D6 /* ExampleSwiftdata.swift in Sources */,
 				D4B437802BB99CFC00FE11D6 /* SubjectFormView.swift in Sources */,
 				D4B437502BB30FCD00FE11D6 /* Item.swift in Sources */,
+				D4B4378A2BBDA66A00FE11D6 /* FormatHours.swift in Sources */,
+				D4B4378C2BBE05EE00FE11D6 /* getWeekdays.swift in Sources */,
 				D4B4374C2BB30FCD00FE11D6 /* AbsenceTrackerApp.swift in Sources */,
+				D4B437862BBD13DF00FE11D6 /* CalculateClassDuration.swift in Sources */,
+				D4B437882BBDA32700FE11D6 /* FormatDates.swift in Sources */,
 				D4B4377A2BB3139300FE11D6 /* SubjectCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

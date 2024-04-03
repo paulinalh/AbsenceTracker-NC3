@@ -25,29 +25,56 @@ struct DetailView: View{
                     .offset(y: -150)
                     
                 
-                HStack(alignment: .top, spacing: 12){
+                VStack{
                     
-                    Button(action: {
+                    HStack(alignment: .top, spacing: 12){
                         
-                        withAnimation(.spring()){
+                        Button(action: {
+                            withAnimation(.spring()){
+                                
+                                show.toggle()
+                            }
+                        }){
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 30, weight: .bold))
+                                .foregroundColor(.white)
                             
-                            show.toggle()
                         }
-                    }){
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 30, weight: .bold))
-                            .foregroundColor(.white)
+                        
+                        Spacer(minLength: 0)
+                        
+                        RoundedTextRectangle(text: getWeekdaysString(from: subject.classDays))
+                        
+                        RoundedTextRectangle(text: formatDates(initialDate: subject.startDate, finalDate: subject.endDate))
+                        
+                        RoundedTextRectangle(text: formatHours(initialDate: subject.initialHour, finalDate: subject.finalHour))
                         
                     }
+                    .padding(.leading, 20)
+                    .padding([.top, .bottom, .trailing ])
+                    .offset(y: -200)
                     
-                    Spacer(minLength: 0)
+                    /*Image(systemName: subject.image)
+                        .matchedGeometryEffect(id: subject.image, in: name)*/
                     
-                    Image(systemName: subject.image)
-                        .matchedGeometryEffect(id: subject.image, in: name)
+                    HStack{
+                        Text("Detailed ")
+                            .foregroundColor(.black)
+                            .font(.largeTitle)
+                        
+                        Text(subject.name)
+                            .foregroundColor(.black)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                    }
+                    Text("absences")
+                        .foregroundColor(.black)
+                        .font(.largeTitle)
+                        .italic()
+                    
+                    
                 }
-                .padding(.leading, 20)
-                .padding([.top, .bottom, .trailing ])
-                .offset(y: -200)
+                
                 
             }
             
@@ -59,11 +86,30 @@ struct DetailView: View{
             
         }.background(Color.white)
     }
+        
+}
+
+struct RoundedTextRectangle: View {
+    let text: String
     
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.black)
+                .frame(maxWidth: .infinity, maxHeight: 30)
+            Text(text)
+                .foregroundColor(.white)
+                .font(.system(size: 10))
+        }
+    }
+    
+    init(text: String) {
+        self.text = text
+    }
 }
 
 #Preview {
 
-    DetailView(subject:  SubjectModel(name: "Math", image: "pencil", scale: 1.0, offset: 0, place: 1, startDate: Date(), endDate: Date(), frequency: 1, initialHour: Date(), finalHour: Date()), show: .constant(true), name: Namespace().wrappedValue)
+    DetailView(subject:  SubjectModel(name: "Math", image: "pencil", scale: 1.0, offset: 0, place: 1, startDate: Date(), endDate: Date(), frequency: 1, initialHour: Date(), finalHour: Date(), attendanceMethod: 0, maxAbsences: 10, currentAbsences: 0, classDays: [1, 2]), show: .constant(true), name: Namespace().wrappedValue)
 
 }

@@ -19,7 +19,6 @@ struct SubjectCardView: View {
     @Binding var selected : SubjectModel!
     @Binding var isDeleting : Bool
     @State private var cardOffset: CGSize = .zero
-
     
     var body: some View {
         
@@ -35,7 +34,7 @@ struct SubjectCardView: View {
                     HStack (){
                         
                         Text(subject.name)
-                            .font(.system(size: 40))
+                            .font(.title)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                         
@@ -43,7 +42,7 @@ struct SubjectCardView: View {
                         
                         
                         Image(systemName: subject.image)
-                            .font(.system(size: 60))
+                            .font(.largeTitle)
                             .foregroundColor(.white)
                             .font(.largeTitle)
                         
@@ -52,17 +51,22 @@ struct SubjectCardView: View {
                     
                     HStack(){
                         
-                        VStack{
+                        VStack(alignment: .leading){
                             
-                            Text("\(subject.place)")
-                                .font(.largeTitle)
+                            Text("\(subject.currentAbsences)")
+                                .font(.title2)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                             
                             
-                            Text("#")
-                                .font(.title)
-                                .fontWeight(.bold)
+                            Text("absences")
+                                .font(.caption)
+                                
+                                .foregroundColor(.white)
+                            
+                            Text("out of \(getMaxAbsences())")
+                                .font(.caption)
+                                
                                 .foregroundColor(.white)
                             
                         }
@@ -71,16 +75,19 @@ struct SubjectCardView: View {
                         
                         
                         
-                        VStack{
+                        VStack(alignment: .leading){
                             
-                            Text("\(subject.place)")
-                                .font(.largeTitle)
+                            Text("\(calculateClassDuration(startDate: Date(), endDate: subject.endDate, classDays: subject.classDays, startTime: subject.initialHour, finishTime: subject.finalHour)!.days)")
+                                .font(.title2)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                             
-                            Text("#\(swiped)")
-                                .font(.title)
-                                .fontWeight(.bold)
+                            
+                            Text("remaining days")
+                                .font(.caption)
+                                .foregroundColor(.white)
+                            Text("of classes")
+                                .font(.caption)
                                 .foregroundColor(.white)
                             
                         }
@@ -91,35 +98,6 @@ struct SubjectCardView: View {
                     
                 }
                 .frame(width:  reader.frame(in: .global).width - 100 - (subject.place - swiped == 0 ? 0 : ((CGFloat(subject.place - swiped) * 10))), height: subject.place - swiped <= 2 ? reader.frame(in: .global).height - 180 + CGFloat(subject.place - swiped) * 15: reader.frame(in: .global).height - 180)
-                /*.frame(
-                    width: reader.frame(in: .global).width - 100,
-                    height: {
-                        // Calculate the adjusted place considering how many times the user has swiped.
-                        let adjustedPlace = subject.place - swiped
-
-                        // Height for the first card (shortest).
-                        let firstCardHeight = reader.frame(in: .global).height - 180
-
-                        // Height increment for each subsequent visible card.
-                        let heightIncrement = 25.0
-
-                        switch adjustedPlace {
-                        case 0:
-                            // The card at the top of the stack (after considering swipes), so it's the shortest.
-                            return firstCardHeight
-                        case 1:
-                            // The second card, make it medium length by adding one increment.
-                            return firstCardHeight + heightIncrement
-                        case 2:
-                            // The third card, make it the longest by adding two increments.
-                            return firstCardHeight + (2 * heightIncrement)
-                        default:
-                            // Any card beyond the third is made shorter than the third to ensure it doesn't show.
-                            // You can adjust this value to make them even shorter if necessary.
-                            return firstCardHeight - 10 // Or any value that keeps it out of view.
-                        }
-                    }()
-                )*/
                 .padding(.vertical)
                 .background( subject.place - swiped == 0 ? Color("DarkBlue") : Color.gray.opacity(0.8))
                 .cornerRadius(25)
@@ -133,6 +111,23 @@ struct SubjectCardView: View {
         }.contentShape(Rectangle())
     }
     
+    func getMaxAbsences()-> Int{
+        let duration = calculateClassDuration(startDate: subject.startDate, endDate: subject.endDate, classDays: subject.classDays, startTime: subject.initialHour, finishTime: subject.finalHour)
+        
+        var maxDays : Int
+        
+        if subject.attendanceMethod == 0{
+            maxDays = subject.maxAbsences * duration!.days
+        }else{
+            maxDays = subject.maxAbsences
+        }
+        
+        return maxDays
+        
+    }
+    
+    
+    
     
 }
 
@@ -141,7 +136,7 @@ struct SubjectCardView: View {
     GeometryReader{
         reader in
         
-        SubjectCardView(subject:  SubjectModel( name: "Math", image: "pencil", scale: 1.0, offset: 0, place: 0, startDate: Date(), endDate: Date(), frequency: 1, initialHour: Date(), finalHour: Date()), reader: reader, swiped: .constant(0), show: .constant(true), selected: .constant(nil), isDeleting: .constant(true) )
+        SubjectCardView(subject:  SubjectModel( name: "Math", image: "pencil", scale: 1.0, offset: 0, place: 0, startDate: Date(), endDate: Date(), frequency: 1, initialHour: Date(), finalHour: Date() ,attendanceMethod: 0, maxAbsences: 10, currentAbsences: 0, classDays: [1,2]), reader: reader, swiped: .constant(0), show: .constant(true), selected: .constant(nil), isDeleting: .constant(true) )
             .modelContainer(for: SubjectModel.self, inMemory: true)
     }
     

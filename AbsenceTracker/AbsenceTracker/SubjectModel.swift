@@ -33,14 +33,12 @@ final class SubjectModel {
     var frequency: Int // Frequency in days of the week
     var initialHour: Date
     var finalHour: Date
-    /*var attendanceMethod: AttendanceMethod
+    var attendanceMethod : Int
+    var maxAbsences : Int
+    var currentAbsences : Int
+    var classDays : [Int]
     
-    enum AttendanceMethod {
-        case percentage(Double) // Percentage of attendance required
-        case maxAbsences(Int) // Maximum number of allowed absences
-    }*/
-    
-    init( name: String, image: String, scale:CGFloat, offset: CGFloat, place: Int, startDate: Date, endDate: Date, frequency: Int, initialHour: Date, finalHour: Date ) {
+    init( name: String, image: String, scale:CGFloat, offset: CGFloat, place: Int, startDate: Date, endDate: Date, frequency: Int, initialHour: Date, finalHour: Date, attendanceMethod: Int, maxAbsences: Int, currentAbsences : Int,  classDays : [Int] ) {
         //self.id = id
         self.name = name
         self.image = image
@@ -52,7 +50,10 @@ final class SubjectModel {
         self.frequency = frequency
         self.initialHour = initialHour
         self.finalHour = finalHour
-        //self.attendanceMethod = attendanceMethod
+        self.attendanceMethod = attendanceMethod
+        self.maxAbsences = maxAbsences
+        self.currentAbsences = currentAbsences
+        self.classDays = classDays
     }
 }
 
