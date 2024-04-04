@@ -50,7 +50,7 @@ struct MainView: View {
                                     
                                     let index = cards.firstIndex(where: {$0.id == subject.id})
                                     withAnimation{
-                                            if value.translation.width > 0 {
+                                            if value.translation.width != 0 {
                                                 cards[index!].offset = value.translation.width
                                             }
                                             
@@ -62,6 +62,16 @@ struct MainView: View {
                                     withAnimation{
                                         if value.translation.width > 150 {
                                             cards[index!].offset = 1000
+                                            if swiped == cards.count - 1 {
+                                                swiped = 0
+                                            }else{
+                                                swiped = subject.place + 1
+                                            }
+                                            
+                                            
+                                            restoreCard(id: index!)
+                                        }else if value.translation.width < -150 {
+                                            cards[index!].offset = -1000
                                             if swiped == cards.count - 1 {
                                                 swiped = 0
                                             }else{
