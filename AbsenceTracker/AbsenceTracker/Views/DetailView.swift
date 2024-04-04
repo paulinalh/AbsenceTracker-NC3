@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct DetailView: View{
     
     var subject : SubjectModel
     @Binding var show : Bool
     var name : Namespace.ID
-
     
+    @Query private var absencesArray: [AbsenceModel]
+    @State private var absencesForSubject : [AbsenceModel] = []
+
     var body : some View{
         GeometryReader{ reader in
             VStack{
@@ -109,31 +112,47 @@ struct DetailView: View{
                     
                 }
                 
+                ScrollView(.horizontal, showsIndicators: false) {
+                           // Utilizes a standard HStack for horizontal layout, spacing elements 10 points apart.
+                    HStack(alignment: .center, spacing: 10.0) {
+                               // Iterates over the colors array to generate a Rectangle view for each color.
+                               ForEach(0..<absencesForSubject.count, id: \.self) { index in
+                                   AbsencesCard(absence: absencesForSubject[index], index: index)
+                                       .scrollTransition { content, phase in
+                                           content
+                                               .opacity(phase.isIdentity ? 1 : 0.3) // Adjusts the opacity during transitions.
+                                               .scaleEffect(phase.isIdentity ? 1 : 0.3) // Scales the Rectangle based on its scroll phase.
+                                               .offset(x: phase.isIdentity ? 0 : 20, // Moves the Rectangle horizontally
+                                                       y: phase.isIdentity ? 0 : 20) // and vertically during transition.
+                                           
+                                       }
+                               }
+                           }
+                           .scrollTargetLayout() // Marks the parent layout as a target for scroll behaviors, aiding alignment.
+                       }
+                       .scrollTargetBehavior(.viewAligned) // Aligns scrolled content based on the geometries of the views.
+                       .safeAreaPadding(.horizontal, 20)
+                       .offset(y: -150)
                 
-                ScrollView(.vertical, showsIndicators: false){
+                
+                HStack{
+                    StatisticsCard(bigStat : "\(subject.currentAbsences * calculateHoursBetween(startDate: subject.initialHour, endDate: subject.finalHour))", description: "hours of total absences" )
                     
-                    HStack{
-                        StatisticsCard(bigStat : "\(subject.currentAbsences)", description: "days of total absences" )
-                        
-                        Spacer()
-                        
-                        StatisticsCard(bigStat : "\(calculateClassDuration(startDate: Date(), endDate: subject.endDate, classDays: subject.classDays, startTime: subject.initialHour, finishTime: subject.finalHour)!.days)", description: "remaining days of required assistance" )
-                        
-                    }
+                    Spacer()
                     
-                    HStack{
-                        StatisticsCard(bigStat : "\(subject.currentAbsences * calculateHoursBetween(startDate: subject.initialHour, endDate: subject.finalHour))", description: "hours of total absences" )
-                        
-                        Spacer()
-                        
-                        StatisticsCard(bigStat : "\(calculateClassDuration(startDate: Date(), endDate: subject.endDate, classDays: subject.classDays, startTime: subject.initialHour, finishTime: subject.finalHour)!.hours)", description: "remaining hours of required assistance" )
-                        
-                    }
+                    StatisticsCard(bigStat : "\(calculateClassDuration(startDate: Date(), endDate: subject.endDate, classDays: subject.classDays, startTime: subject.initialHour, finishTime: subject.finalHour)!.hours)", description: "remaining hours of required assistance" )
+                    
                 }.offset(y: -150)
-                    .frame(width: reader.size.width, height: reader.size.height * 4) // Adjust height as needed
+                
 
                 
-            }.background(Color.white)
+            }
+            .background(Color("LightGray"))
+            
+        }
+        .onAppear{
+            self.absencesForSubject = absencesArray.filter { $0.subjectID == subject.id }
+
         }
     }
     
@@ -172,7 +191,70 @@ struct RoundedTextRectangle: View {
         self.text = text
     }
 }
-
+struct AbsencesCard: View {
+    let absence: AbsenceModel
+    let index: Int
+    
+    var body: some View {
+        ZStack {
+            
+            RoundedRectangle(cornerRadius: 10.0)
+                .fill(Color.clear)
+            .frame(width: .infinity, height: 150)
+                        
+                
+            VStack(alignment: .leading){
+                
+                HStack{
+                    Text("Absence #\(index)")
+                        .bold()
+                        .foregroundColor(Color("DarkBlue"))
+                        .font(.subheadline)
+                    
+                    Spacer()
+                    
+                }.padding(.horizontal, 20)
+                
+                HStack{
+                    
+                    Text("\(absence.hoursSkipped) hours on ")
+                        
+                        .foregroundColor(.gray)
+                        .font(.caption)
+                    
+                    Text(formatDate(date: absence.date))
+                        .foregroundColor(Color("DarkBlue").opacity(0.6))
+                        .font(.caption)
+                    
+                    
+                    Spacer()
+                }
+                .padding(.horizontal, 20)
+                
+                HStack{
+                    Text("Reason: ")
+                        .bold()
+                        .foregroundColor(.black)
+                        .font(.caption)
+                    
+                    Text(absence.reason)
+                        .foregroundColor(.black)
+                        .font(.caption)
+                    
+                }.padding(.horizontal, 20)
+                
+                
+                
+            }
+            
+        }
+    }
+    
+    init(absence: AbsenceModel, index:Int) {
+        self.absence = absence
+        self.index = index
+    }
+}
 
 struct StatisticsCard: View {
     let bigStat: String
@@ -181,21 +263,24 @@ struct StatisticsCard: View {
     var body: some View {
         ZStack (alignment: .top){
             RoundedRectangle(cornerRadius: 10)
-                .fill(Color("DarkBlue"))
-                .frame(maxWidth: .infinity, maxHeight: 300)
+                .fill(Color.white)
+                .frame(maxWidth: .infinity, maxHeight: 150)
                 .padding()
             VStack(alignment: .leading){
                 
                 Text(bigStat)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .font(.title)
                     .bold()
-                    .padding()
+                    .padding(.horizontal)
+                    .padding( .top)
                 
                 Text(description)
-                    .foregroundColor(.white)
-                    .font(.caption)
-                    .padding()
+                    .foregroundColor(.black)
+                    .font(.caption2)
+                    .padding(.horizontal)
+                    .padding(.bottom)
+
                 
             }
             .padding()

@@ -16,3 +16,12 @@ func formatDates(initialDate: Date, finalDate: Date) -> String {
     
     return "\(initialDateString) - \(finalDateString)"
 }
+
+func formatDate(date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd MMM"
+    
+    let date = dateFormatter.string(from: date)
+    
+    return "\(date)"
+}
