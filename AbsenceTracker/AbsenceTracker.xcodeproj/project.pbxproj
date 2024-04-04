@@ -26,6 +26,8 @@
 		D4B437882BBDA32700FE11D6 /* FormatDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B437872BBDA32700FE11D6 /* FormatDates.swift */; };
 		D4B4378A2BBDA66A00FE11D6 /* FormatHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B437892BBDA66A00FE11D6 /* FormatHours.swift */; };
 		D4B4378C2BBE05EE00FE11D6 /* getWeekdays.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B4378B2BBE05EE00FE11D6 /* getWeekdays.swift */; };
+		D4B437912BBE091C00FE11D6 /* AbsenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B437902BBE091C00FE11D6 /* AbsenceModel.swift */; };
+		D4B437932BBE0B0500FE11D6 /* AbsenceFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B437922BBE0B0500FE11D6 /* AbsenceFormView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		D4B437872BBDA32700FE11D6 /* FormatDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatDates.swift; sourceTree = "<group>"; };
 		D4B437892BBDA66A00FE11D6 /* FormatHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatHours.swift; sourceTree = "<group>"; };
 		D4B4378B2BBE05EE00FE11D6 /* getWeekdays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getWeekdays.swift; sourceTree = "<group>"; };
+		D4B437902BBE091C00FE11D6 /* AbsenceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceModel.swift; sourceTree = "<group>"; };
+		D4B437922BBE0B0500FE11D6 /* AbsenceFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceFormView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +174,7 @@
 			children = (
 				D4B4374F2BB30FCD00FE11D6 /* Item.swift */,
 				D4B4377B2BB314B600FE11D6 /* SubjectModel.swift */,
+				D4B437902BBE091C00FE11D6 /* AbsenceModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 				D4B437792BB3139300FE11D6 /* SubjectCardView.swift */,
 				D4B4377F2BB99CFC00FE11D6 /* SubjectFormView.swift */,
 				D4B437812BB99E0800FE11D6 /* ExampleSwiftdata.swift */,
+				D4B437922BBE0B0500FE11D6 /* AbsenceFormView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -317,7 +323,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4B437932BBE0B0500FE11D6 /* AbsenceFormView.swift in Sources */,
 				D4B4374E2BB30FCD00FE11D6 /* ContentView.swift in Sources */,
+				D4B437912BBE091C00FE11D6 /* AbsenceModel.swift in Sources */,
 				D4B437782BB3104B00FE11D6 /* MainView.swift in Sources */,
 				D4B4377C2BB314B600FE11D6 /* SubjectModel.swift in Sources */,
 				D4B437842BBD0E0D00FE11D6 /* SchoolSymbols.swift in Sources */,

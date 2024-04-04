@@ -9,7 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @State private var isModalPresented = false
+    @Environment(\.modelContext) private var modelContext
+    @Query private var subject_arr: [SubjectModel]
+    
+    @State private var isModalSubjectFormPresented = false
+    @State private var isModalAbsenceFormPresented = false
+
     @State private var username = ""
     @State private var password = ""
     
@@ -21,15 +26,33 @@ struct ContentView: View {
                         
                         HStack{
                             
+                            if subject_arr.count > 0{
+                                Button(action: {
+                                    isModalAbsenceFormPresented = true
+                                }) {
+                                    HStack{
+                                        
+                                        Image(systemName: "plus.circle.fill")
+                                            .foregroundColor(Color("DarkBlue"))
+                                        
+                                        Text("Add Absence")
+                                            .font(.subheadline)
+                                            .foregroundColor(Color("DarkBlue"))
+                                    }
+                                    
+
+                                }
+                            }
+                            
+                            
                             Spacer()
-                            Text("New Subject")
-                                .font(.title2)
-                                .foregroundColor(Color("DarkBlue"))
+                            
                             
                             Button(action: {
-                                isModalPresented = true
+                                isModalSubjectFormPresented = true
                             }) {
-                                Image(systemName: "plus.circle.fill")
+                                Text("Add Subject")
+                                    .font(.subheadline)
                                     .foregroundColor(Color("DarkBlue"))
 
                             }
@@ -38,8 +61,11 @@ struct ContentView: View {
                     }
                 }
         }
-        .sheet(isPresented: $isModalPresented) {
-            SubjectFormView( isPresented: $isModalPresented)
+        .sheet(isPresented: $isModalSubjectFormPresented) {
+            SubjectFormView( isPresented: $isModalSubjectFormPresented)
+        }
+        .sheet(isPresented: $isModalAbsenceFormPresented) {
+            AbsenceFormView( firstSubject: subject_arr.first!  , isPresented: $isModalAbsenceFormPresented)
         }
     }
 }

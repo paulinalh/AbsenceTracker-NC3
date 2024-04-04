@@ -14,6 +14,7 @@ struct AbsenceTrackerApp: App {
         let schema = Schema([
             Item.self,
             SubjectModel.self,
+            AbsenceModel.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

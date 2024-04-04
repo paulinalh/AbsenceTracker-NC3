@@ -27,7 +27,7 @@ struct DetailView: View{
                 
                 VStack{
                     
-                    HStack(alignment: .top, spacing: 12){
+                    HStack{
                         
                         Button(action: {
                             withAnimation(.spring()){
@@ -36,12 +36,17 @@ struct DetailView: View{
                             }
                         }){
                             Image(systemName: "chevron.left")
-                                .font(.system(size: 30, weight: .bold))
+                                .font(.system(size: 20))
                                 .foregroundColor(.white)
                             
                         }
                         
-                        Spacer(minLength: 0)
+                        Spacer()
+                    }.padding( 20)
+                        //.padding([.top, .bottom, .trailing ])
+                        .offset(y: -150)
+                    
+                    HStack( spacing: 12){
                         
                         RoundedTextRectangle(text: getWeekdaysString(from: subject.classDays))
                         
@@ -50,28 +55,42 @@ struct DetailView: View{
                         RoundedTextRectangle(text: formatHours(initialDate: subject.initialHour, finalDate: subject.finalHour))
                         
                     }
-                    .padding(.leading, 20)
-                    .padding([.top, .bottom, .trailing ])
-                    .offset(y: -200)
+                    .padding(.horizontal, 20)
+                    .offset(y: -150)
                     
                     /*Image(systemName: subject.image)
                         .matchedGeometryEffect(id: subject.image, in: name)*/
                     
                     HStack{
-                        Text("Detailed ")
-                            .foregroundColor(.black)
-                            .font(.largeTitle)
-                        
-                        Text(subject.name)
-                            .foregroundColor(.black)
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                    }
-                    Text("absences")
-                        .foregroundColor(.black)
-                        .font(.largeTitle)
-                        .italic()
+                        VStack{
+                            
+                            HStack(){
+                                Text("Detailed ")
+                                    .foregroundColor(.black)
+                                    .font(.title)
+                                    
+                                
+                                Text(subject.name)
+                                    .foregroundColor(.black)
+                                    .font(.title)
+                                    .fontWeight(.bold)
+                                
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            Text("absences")
+                                .foregroundColor(.black)
+                                .font(.title)
+                                .italic()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                        }
+                        Spacer()
+                    }.padding(.horizontal, 20)
+                        .offset(y: -150)
                     
+                    
+                    //ProgressBar(progress: 0.6) // 60% progress
+
                     
                 }
                 

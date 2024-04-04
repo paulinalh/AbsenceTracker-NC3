@@ -23,7 +23,7 @@ struct SubjectFormView: View {
     @State private var maxAbsences: Int = 0
     @State private var classDays: [Int] = []
 
-    @State private var image = ""
+    @State private var image = "pencil"
     @State private var offset = 0
     @State private var place = 0
     @Binding var isPresented: Bool
@@ -57,8 +57,8 @@ struct SubjectFormView: View {
                         ForEach(Weekday.allCases, id: \.self) { day in
                                    Text(day.rawValue)
                                        .frame(width: 35, height: 35)
-                                       .foregroundColor(selectedDays.contains(day) ? .white : .blue)
-                                       .background(selectedDays.contains(day) ? .blue : .clear)
+                                       .foregroundColor(selectedDays.contains(day) ? .white : Color("DarkBlue"))
+                                       .background(selectedDays.contains(day) ? Color("DarkBlue") : .clear)
                                        .clipShape(Circle())
                                        .onTapGesture {
                                            if selectedDays.contains(day) {
