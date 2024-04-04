@@ -139,7 +139,7 @@ struct SubjectFormView: View {
             //let attendanceMethod: Subject.AttendanceMethod = attendanceMethod == 0 ? .percentage(0.8) : .maxAbsences(5)
             //let newSubject = Subject(name: name, startDate: startDate, endDate: endDate, frequency: frequency, initialHour: initialHour, finalHour: finalHour, attendanceMethod: attendanceMethod)
             
-        let newModel = SubjectModel(name: name, image: image,scale: 1.0,  offset: 0, place: subject_arr.count , startDate: startDate, endDate: endDate, frequency: frequency, initialHour: initialHour, finalHour: finalHour, attendanceMethod: attendanceMethod, maxAbsences: (attendanceMethod == 0 ? 100 - maxAbsences :  maxAbsences), currentAbsences: 0, classDays : [1, 2])
+        let newModel = SubjectModel(name: name, image: image,scale: 1.0,  offset: 0, place: subject_arr.count , startDate: startDate, endDate: endDate, frequency: frequency, initialHour: initialHour, finalHour: finalHour, attendanceMethod: attendanceMethod, maxAbsences: (attendanceMethod == 0 ? calculateClassDuration(startDate: startDate, endDate: endDate, classDays: classDays, startTime: initialHour, finishTime: finalHour)!.days * maxAbsences / 100 :  maxAbsences), currentAbsences: 0, classDays : classDays)
             
             //subjects.append(newSubject)
             

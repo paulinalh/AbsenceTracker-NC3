@@ -41,22 +41,8 @@ func calculateClassDuration(startDate: Date, endDate: Date, classDays: [Int], st
     return (totalHours, classDayCount)
 }
 
-func calculateHoursBetween(startHour: String, endHour: String) -> Int? {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "HH:mm"
-    
-    guard let startDate = dateFormatter.date(from: startHour),
-          let endDate = dateFormatter.date(from: endHour) else {
-        // Invalid input format
-        return nil
-    }
-    
+func calculateHoursBetween(startDate: Date, endDate: Date) -> Int {
     let calendar = Calendar.current
     let components = calendar.dateComponents([.hour], from: startDate, to: endDate)
-    
-    if let hours = components.hour {
-        return hours
-    } else {
-        return nil
-    }
+    return components.hour ?? 0
 }

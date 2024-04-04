@@ -12,101 +12,147 @@ struct DetailView: View{
     var subject : SubjectModel
     @Binding var show : Bool
     var name : Namespace.ID
+
     
     var body : some View{
-        VStack{
-            
-            ZStack{
+        GeometryReader{ reader in
+            VStack{
                 
-                Rectangle()
-                    .fill(Color("DarkBlue"))
-                    .cornerRadius(50)
-                    .frame(width: .infinity, height: 500)
-                    .offset(y: -150)
+                ZStack{
                     
-                
-                VStack{
-                    
-                    HStack{
-                        
-                        Button(action: {
-                            withAnimation(.spring()){
-                                
-                                show.toggle()
-                            }
-                        }){
-                            Image(systemName: "chevron.left")
-                                .font(.system(size: 20))
-                                .foregroundColor(.white)
-                            
-                        }
-                        
-                        Spacer()
-                    }.padding( 20)
-                        //.padding([.top, .bottom, .trailing ])
+                    Rectangle()
+                        .fill(Color("DarkBlue"))
+                        .cornerRadius(50)
+                        .frame(width: .infinity, height: 500)
                         .offset(y: -150)
                     
-                    HStack( spacing: 12){
+                    
+                    VStack{
                         
-                        RoundedTextRectangle(text: getWeekdaysString(from: subject.classDays))
+                        HStack{
+                            
+                            Button(action: {
+                                withAnimation(.spring()){
+                                    
+                                    show.toggle()
+                                }
+                            }){
+                                Image(systemName: "chevron.left")
+                                    .font(.system(size: 20))
+                                    .foregroundColor(.white)
+                                
+                            }
+                            
+                            Spacer()
+                        }.padding( 20)
+                        //.padding([.top, .bottom, .trailing ])
                         
-                        RoundedTextRectangle(text: formatDates(initialDate: subject.startDate, finalDate: subject.endDate))
                         
-                        RoundedTextRectangle(text: formatHours(initialDate: subject.initialHour, finalDate: subject.finalHour))
+                        HStack( spacing: 12){
+                            
+                            RoundedTextRectangle(text: getWeekdaysString(from: subject.classDays))
+                            
+                            RoundedTextRectangle(text: formatDates(initialDate: subject.startDate, finalDate: subject.endDate))
+                            
+                            RoundedTextRectangle(text: formatHours(initialDate: subject.initialHour, finalDate: subject.finalHour))
+                            
+                        }
+                        .padding(.horizontal, 20)
+                        
+                        
+                        /*Image(systemName: subject.image)
+                         .matchedGeometryEffect(id: subject.image, in: name)*/
+                        
+                        HStack{
+                            VStack{
+                                
+                                HStack(){
+                                    Text("Detailed ")
+                                        .foregroundColor(.black)
+                                        .font(.title)
+                                    
+                                    
+                                    Text(subject.name)
+                                        .foregroundColor(.black)
+                                        .font(.title)
+                                        .fontWeight(.bold)
+                                    
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                Text("absences")
+                                    .foregroundColor(.black)
+                                    .font(.title)
+                                    .italic()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                            }
+                            Spacer()
+                            
+                            
+                        }.padding(.horizontal, 20)
+                        
+                        
+                        ProgressBar(progress: getAbsencesPercentage())
+                            .padding(.horizontal, 50)
+                        
+                        Text("you've used \(getAbsencesPercentage())% of your total absences")
+                            .foregroundColor(.white)
+                            .font(.caption)
+                            .italic()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .offset(y: -200)
+                            .padding(.horizontal, 50)
+                        
                         
                     }
-                    .padding(.horizontal, 20)
-                    .offset(y: -150)
                     
-                    /*Image(systemName: subject.image)
-                        .matchedGeometryEffect(id: subject.image, in: name)*/
-                    
-                    HStack{
-                        VStack{
-                            
-                            HStack(){
-                                Text("Detailed ")
-                                    .foregroundColor(.black)
-                                    .font(.title)
-                                    
-                                
-                                Text(subject.name)
-                                    .foregroundColor(.black)
-                                    .font(.title)
-                                    .fontWeight(.bold)
-                                
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            Text("absences")
-                                .foregroundColor(.black)
-                                .font(.title)
-                                .italic()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                        }
-                        Spacer()
-                    }.padding(.horizontal, 20)
-                        .offset(y: -150)
-                    
-                    
-                    //ProgressBar(progress: 0.6) // 60% progress
-
                     
                 }
                 
                 
-            }
-            
-            
-            ScrollView(.vertical, showsIndicators: false){
+                ScrollView(.vertical, showsIndicators: false){
+                    
+                    HStack{
+                        StatisticsCard(bigStat : "\(subject.currentAbsences)", description: "days of total absences" )
+                        
+                        Spacer()
+                        
+                        StatisticsCard(bigStat : "\(calculateClassDuration(startDate: Date(), endDate: subject.endDate, classDays: subject.classDays, startTime: subject.initialHour, finishTime: subject.finalHour)!.days)", description: "remaining days of required assistance" )
+                        
+                    }
+                    
+                    HStack{
+                        StatisticsCard(bigStat : "\(subject.currentAbsences * calculateHoursBetween(startDate: subject.initialHour, endDate: subject.finalHour))", description: "hours of total absences" )
+                        
+                        Spacer()
+                        
+                        StatisticsCard(bigStat : "\(calculateClassDuration(startDate: Date(), endDate: subject.endDate, classDays: subject.classDays, startTime: subject.initialHour, finishTime: subject.finalHour)!.hours)", description: "remaining hours of required assistance" )
+                        
+                    }
+                }.offset(y: -150)
+                    .frame(width: reader.size.width, height: reader.size.height * 4) // Adjust height as needed
+
                 
-                Text("blabla")
-            }.offset(y: -150)
-            
-        }.background(Color.white)
+            }.background(Color.white)
+        }
+    }
+    
+    func getAbsencesPercentage()-> Double{
+        let duration = calculateClassDuration(startDate: subject.startDate, endDate: subject.endDate, classDays: subject.classDays, startTime: subject.initialHour, finishTime: subject.finalHour)
+        
+        var percentage : Double
+        
+        percentage = Double(( subject.currentAbsences * 100 ) / duration!.days)
+        let roundedValue = (percentage * 100).rounded() / 100
+
+        
+        return roundedValue
+        
     }
         
 }
+
+
 
 struct RoundedTextRectangle: View {
     let text: String
@@ -124,6 +170,42 @@ struct RoundedTextRectangle: View {
     
     init(text: String) {
         self.text = text
+    }
+}
+
+
+struct StatisticsCard: View {
+    let bigStat: String
+    let description: String
+    
+    var body: some View {
+        ZStack (alignment: .top){
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color("DarkBlue"))
+                .frame(maxWidth: .infinity, maxHeight: 300)
+                .padding()
+            VStack(alignment: .leading){
+                
+                Text(bigStat)
+                    .foregroundColor(.white)
+                    .font(.title)
+                    .bold()
+                    .padding()
+                
+                Text(description)
+                    .foregroundColor(.white)
+                    .font(.caption)
+                    .padding()
+                
+            }
+            .padding()
+            
+        }
+    }
+    
+    init(bigStat: String, description: String) {
+        self.bigStat = bigStat
+        self.description = description
     }
 }
 

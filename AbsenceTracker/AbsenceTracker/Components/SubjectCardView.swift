@@ -64,7 +64,7 @@ struct SubjectCardView: View {
                                 
                                 .foregroundColor(.white)
                             
-                            Text("out of \(getMaxAbsences())")
+                            Text("out of \(getMaxAbsences()) days")
                                 .font(.caption)
                                 
                                 .foregroundColor(.white)
@@ -83,23 +83,21 @@ struct SubjectCardView: View {
                                 .foregroundColor(.white)
                             
                             
-                            Text("remaining days")
+                            Text("remaining days of classes")
                                 .font(.caption)
                                 .foregroundColor(.white)
-                            Text("of classes")
-                                .font(.caption)
-                                .foregroundColor(.white)
+                            
                             
                         }
                         
                         
 
-                    }.padding(50)
+                    }.padding(.horizontal, 50)
                     
                 }
                 .frame(width:  reader.frame(in: .global).width - 100 - (subject.place - swiped == 0 ? 0 : ((CGFloat(subject.place - swiped) * 10))), height: subject.place - swiped <= 2 ? reader.frame(in: .global).height - 180 + CGFloat(subject.place - swiped) * 15: reader.frame(in: .global).height - 180)
                 .padding(.vertical)
-                .background( subject.place - swiped == 0 ? Color("DarkBlue") : Color.gray.opacity(0.8))
+                .background( subject.place - swiped == 0 ? Color("DarkBlue") : Color.gray.opacity(0.5))
                 .cornerRadius(25)
                 .padding(.horizontal, 30 + (CGFloat(subject.place - swiped) * 10))
                 .shadow(color: Color.black.opacity(0.12), radius: 5, x: 0, y:5)
@@ -117,7 +115,7 @@ struct SubjectCardView: View {
         var maxDays : Int
         
         if subject.attendanceMethod == 0{
-            maxDays = subject.maxAbsences * duration!.days
+            maxDays = ( subject.maxAbsences * duration!.days) / 100
         }else{
             maxDays = subject.maxAbsences
         }
