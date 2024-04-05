@@ -72,19 +72,19 @@ struct DetailView: View{
                                 HStack(){
                                     Text("Detailed ")
                                         .foregroundColor(.black)
-                                        .font(.title)
+                                        .font(.title2)
                                     
                                     
                                     Text(subject.name)
                                         .foregroundColor(.black)
-                                        .font(.title)
+                                        .font(.title2)
                                         .fontWeight(.bold)
                                     
                                 }
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 Text("absences")
                                     .foregroundColor(.black)
-                                    .font(.title)
+                                    .font(.title2)
                                     .italic()
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                 
@@ -95,7 +95,7 @@ struct DetailView: View{
                         }.padding(.horizontal, 20)
                         
                         
-                        ProgressBar(progress: getAbsencesPercentage())
+                        ProgressBar(progress: getAbsencesPercentage()/100)
                             .padding(.horizontal, 50)
                         
                         Text("you've used \(getAbsencesPercentage())% of your total absences")
@@ -164,7 +164,7 @@ struct DetailView: View{
         percentage = Double(( subject.currentAbsences * 100 ) / duration!.days)
         let roundedValue = (percentage * 100).rounded() / 100
 
-        
+        print(roundedValue)
         return roundedValue
         
     }
