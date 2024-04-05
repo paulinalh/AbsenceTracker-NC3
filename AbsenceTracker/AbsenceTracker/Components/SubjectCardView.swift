@@ -95,11 +95,13 @@ struct SubjectCardView: View {
                     }.padding(.horizontal, 50)
                     
                 }
-                .frame(width:  reader.frame(in: .global).width - 100 - (subject.place - swiped == 0 ? 0 : ((CGFloat(subject.place - swiped) * 10))), height: subject.place - swiped <= 2 ? reader.frame(in: .global).height - 180 + CGFloat(subject.place - swiped) * 15: reader.frame(in: .global).height - 180)
+//                .frame(width:  reader.frame(in: .global).width - 100 - (subject.place - swiped == 0 ? 0 : ((CGFloat(subject.place - swiped) * 10))), height: subject.place - swiped <= 2 ? reader.frame(in: .global).height - 180 + CGFloat(subject.place - swiped) * 15: reader.frame(in: .global).height - 180)
+                .frame(width:  reader.frame(in: .global).width - 100 - (subject.place  == 0 ? 0 : ((CGFloat(subject.place - swiped) * 10))), height: subject.place  <= 2 ? reader.frame(in: .global).height - 180 + CGFloat(subject.place ) * 15: reader.frame(in: .global).height - 180)
                 .padding(.vertical)
-                .background( subject.place - swiped == 0 ? Color("DarkBlue") : Color.gray.opacity(0.5))
+                //.background( subject.place == 0 ? Color("DarkBlue") : Color.gray.opacity(0.5))
+                .background( Color("DarkBlue"))
                 .cornerRadius(25)
-                .padding(.horizontal, 30 + (CGFloat(subject.place - swiped) * 10))
+                .padding(.horizontal, 30 + (CGFloat(subject.place ) * 10))
                 .shadow(color: Color.black.opacity(0.12), radius: 5, x: 0, y:5)
             
                 Spacer()

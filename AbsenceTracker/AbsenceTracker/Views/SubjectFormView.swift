@@ -45,8 +45,8 @@ struct SubjectFormView: View {
                     Picker("Subject Icon", selection: $image) {
                                         ForEach(schoolSymbols, id: \.self) {icon in
                                             Image(systemName: icon)
-                                                .foregroundColor(.black)
-                                                .font(.caption)
+                                                .foregroundColor(.primary)
+                                                .font(.subheadline)
                                         }
                                     }
                                     .pickerStyle(.navigationLink)
@@ -65,13 +65,13 @@ struct SubjectFormView: View {
                                                selectedDays.remove(day)
                                                frequency = frequency - 1
                                                if let index = Weekday.allCases.firstIndex(of: day) {
-                                                   classDays.removeAll { $0 == index }
+                                                   classDays.removeAll { $0 == index - 1}
                                                    }
                                            } else {
                                                selectedDays.insert(day)
                                                frequency = frequency + 1
                                                if let index = Weekday.allCases.firstIndex(of: day) {
-                                                   classDays.append(index)
+                                                   classDays.append(index + 1)
                                                 }
                                            }
                                        }
