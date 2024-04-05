@@ -1,13 +1,12 @@
 # AbsenceTracker-NC3
 
 <img src="https://github.com/paulinalh/AbsenceTracker-NC3/assets/65806675/cd183346-24e8-4985-8bb8-f2c906961bf3" width="300" />
-<img src="https://github.com/paulinalh/AbsenceTracker-NC3/assets/65806675/cd183346-24e8-4985-8bb8-f2c906961bf3](https://github.com/paulinalh/AbsenceTracker-NC3/assets/65806675/0a0e2db0-097e-48e3-9f5c-32f3fbc9c3f0" width="300" />
-
-
+<img src="https://github.com/paulinalh/AbsenceTracker-NC3/assets/65806675/0a0e2db0-097e-48e3-9f5c-32f3fbc9c3f0" width="300" />
 <img src="https://github.com/paulinalh/AbsenceTracker-NC3/assets/65806675/cd183346-24e8-4985-8bb8-f2c906961bf3" width="300" />
 <img src="https://github.com/paulinalh/AbsenceTracker-NC3/assets/65806675/83545adc-5eae-4980-9d28-8267946aecbf" width="300" />
 
 <img src="https://github.com/paulinalh/AbsenceTracker-NC3/assets/65806675/2f755147-330a-4ef5-ba9f-da5f1e132207" width="300" />
+
 
 
 ### Subject Model Sorting
