@@ -1,5 +1,11 @@
 # AbsenceTracker-NC3
 
+![Simulator Screenshot - iPhone 15 - 2024-04-05 at 15 38 42](https://github.com/paulinalh/AbsenceTracker-NC3/assets/65806675/cd183346-24e8-4985-8bb8-f2c906961bf3)
+![Simulator Screenshot - iPhone 15 - 2024-04-05 at 15 47 52](https://github.com/paulinalh/AbsenceTracker-NC3/assets/65806675/0a0e2db0-097e-48e3-9f5c-32f3fbc9c3f0)
+![Simulator Screenshot - iPhone 15 - 2024-04-05 at 15 51 52](https://github.com/paulinalh/AbsenceTracker-NC3/assets/65806675/83545adc-5eae-4980-9d28-8267946aecbf)
+![Simulator Screenshot - iPhone 15 - 2024-04-05 at 15 47 55](https://github.com/paulinalh/AbsenceTracker-NC3/assets/65806675/2f755147-330a-4ef5-ba9f-da5f1e132207)
+
+
 ### Subject Model Sorting
 This project demonstrates sorting an array of SubjectModel instances based on different sorting options using SwiftUI and Swift programming language. Here's an overview of the project structure and functionality:
 
